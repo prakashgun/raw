@@ -30,8 +30,10 @@ export default class HeaderLanding extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: '12%',
-        flex: 0
+        height: '7%',
+        flex: 0,
+        // borderColor: 'blue',
+        // borderWidth: 2
     },
     header: {
         backgroundColor: 'orange'
