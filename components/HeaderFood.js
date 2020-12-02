@@ -32,10 +32,10 @@ export default function HeaderFood({ title }) {
 
 const styles = StyleSheet.create({
     container: {
-        height: '28%',
+        height: '8%',
         flex: 0,
         borderColor: 'blue',
-        borderWidth: 2
+        borderWidth: 1
     },
     header: {
         backgroundColor: 'orange'

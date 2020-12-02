@@ -5,7 +5,11 @@ import { useNavigation } from '@react-navigation/native'
 export default function PromoFoodItem({ image, text }) {
     const navigation = useNavigation()
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('FoodScreen')}>
+        <TouchableOpacity
+            onPress={() => navigation.navigate('FoodScreen', {
+                title: text
+            })}
+        >
             <View style={styles.foodCard}>
                 <View >
                     <Image
