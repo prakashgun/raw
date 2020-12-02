@@ -1,16 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { Container, Header, Left, Right, Body, Button } from 'native-base'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { useNavigation } from '@react-navigation/native'
 
-export default function HeaderLanding()  {
+export default function HeaderFood({ title }) {
+
+    const navigation = useNavigation()
+
     return (
         <Container style={styles.container}>
             <Header style={styles.header}>
                 <Left>
-                    <Button transparent onPress={() => console.log('Left button pressed')}>
-                        <FontAwesomeIcon style={styles.icon} icon={faBars} />
+                    <Button transparent onPress={() => navigation.goBack()}>
+                        <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} />
                     </Button>
                 </Left>
                 <Body>
@@ -28,10 +32,10 @@ export default function HeaderLanding()  {
 
 const styles = StyleSheet.create({
     container: {
-        height: '7%',
+        height: '28%',
         flex: 0,
-        // borderColor: 'blue',
-        // borderWidth: 2
+        borderColor: 'blue',
+        borderWidth: 2
     },
     header: {
         backgroundColor: 'orange'
@@ -43,3 +47,4 @@ const styles = StyleSheet.create({
         fontSize: 20
     }
 })
+

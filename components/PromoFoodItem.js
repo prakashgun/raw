@@ -1,26 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Text, StyleSheet, View, Image, Dimensions, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
-export default class PromoFoodItem extends Component {
-    render() {
-        return (
-            <TouchableOpacity onPress={() => alert(this.props.text)}>
-                <View style={styles.foodCard}>
-                    <View >
-                        <Image
-                            source={this.props.image}
-                            style={styles.promoImage}
-                            resizeMode="contain"
-                            blurRadius={1}
-                        />
-                    </View>
-                    <View style={styles.textView}>
-                        <Text style={styles.foodTitle}>{this.props.text}</Text>
-                    </View>
+export default function PromoFoodItem({ image, text }) {
+    const navigation = useNavigation()
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate('FoodScreen')}>
+            <View style={styles.foodCard}>
+                <View >
+                    <Image
+                        source={image}
+                        style={styles.promoImage}
+                        resizeMode="contain"
+                        blurRadius={1}
+                    />
                 </View>
-            </TouchableOpacity>
-        )
-    }
+                <View style={styles.textView}>
+                    <Text style={styles.foodTitle}>{text}</Text>
+                </View>
+            </View>
+        </TouchableOpacity>
+    )
+
 }
 
 const styles = StyleSheet.create({
@@ -48,3 +49,4 @@ const styles = StyleSheet.create({
         // paddingVertical: '5%'
     }
 })
+
