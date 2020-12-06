@@ -6,14 +6,29 @@ import FoodItem from '../components/FoodItem'
 
 export default function FoodScreen({ route, navigation }) {
 
-    const { title } = route.params
+    const { foodTitles, foodDescriptions, prices, foodImages, foodSize } = route.params
+
+    var foodItems = []
+
+    for (let i = 0; i < foodSize; i++) {
+        foodItems.push(
+            <View>
+                <FoodItem
+                    title={foodTitles[i]}
+                    image = {foodImages[i]}
+                    price={prices[i]}
+                    description={foodDescriptions[i]}
+                />
+            </View>
+        )
+    }
 
     return (
         <Container>
             <HeaderFood />
             <Content>
-                <Text style={styles.title}>{title}</Text>
-                <FoodItem />
+                <Text style={styles.title}>Food Item</Text>
+                {foodItems}
             </Content>
         </Container>
     )

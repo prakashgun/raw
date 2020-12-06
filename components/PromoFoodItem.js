@@ -2,12 +2,18 @@ import React from 'react'
 import { Text, StyleSheet, View, Image, Dimensions, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-export default function PromoFoodItem({ image, text }) {
+export default function PromoFoodItem(
+    { image, text, foodTitles, foodDescriptions, foodImages, prices, foodSize }
+    ) {
     const navigation = useNavigation()
     return (
         <TouchableOpacity
             onPress={() => navigation.navigate('FoodScreen', {
-                title: text
+                foodTitles: foodTitles,
+                foodDescriptions: foodDescriptions,
+                foodImages: foodImages,
+                prices: prices,
+                foodSize: foodSize
             })}
         >
             <View style={styles.foodCard}>

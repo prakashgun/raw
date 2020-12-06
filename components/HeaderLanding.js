@@ -4,12 +4,12 @@ import { Container, Header, Left, Right, Body, Button } from 'native-base'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
-export default function HeaderLanding()  {
+export default function HeaderLanding({ openDrawer }) {
     return (
         <Container style={styles.container}>
             <Header style={styles.header}>
                 <Left>
-                    <Button transparent onPress={() => console.log('Left button pressed')}>
+                    <Button transparent onPress={() => openDrawer()}>
                         <FontAwesomeIcon style={styles.icon} icon={faBars} />
                     </Button>
                 </Left>
