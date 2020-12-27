@@ -15,7 +15,7 @@ function HomeScreen() {
 const Stack = createStackNavigator();
 
 function App() {
-  return (
+  return ( 
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
