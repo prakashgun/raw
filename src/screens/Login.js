@@ -37,5 +37,8 @@ export default function Login() {
 
 const styles = StyleSheet.create({
     input: {},
-    registerButton:{}
+    registerButton:{
+        padding: 10,
+        fontSize: 40
+    }
 })

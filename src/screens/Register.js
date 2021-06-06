@@ -5,11 +5,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import Container from '../components/common/Container'
 import CustomButton from '../components/common/CustomButton'
 import Input from '../components/common/Input'
+import envs from '../config/env'
 
 export default function Register() {
     const [form, setForm] = useState({})
     const [errors, setErrors] = useState({})
     const { navigate } = useNavigation()
+    const {BACKEND_URL} = envs
+
+    console.log('backend url2: ', BACKEND_URL)
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value })
