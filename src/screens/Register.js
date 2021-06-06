@@ -13,10 +13,45 @@ export default function Register() {
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value })
+
+        if (value) {
+            if (name === 'password') {
+                if (value.length < 3) {
+                    setErrors((prev) => { return { ...prev, [name]: 'Password must be atleast 3 characters' } })
+                } else {
+                    setErrors((prev) => { return { ...prev, [name]: null } })
+                }
+            } else {
+                setErrors((prev) => { return { ...prev, [name]: null } })
+            }
+        } else {
+            setErrors((prev) => { return { ...prev, [name]: 'This field is required' } })
+
+        }
     }
     const onSubmit = () => {
         //validation
         console.log('form', form)
+
+        if (!form.userName) {
+            setErrors((prev) => { return { ...prev, userName: 'Please add a username' } })
+        }
+
+        if (!form.lastName) {
+            setErrors((prev) => { return { ...prev, userName: 'Please add a username' } })
+        }
+
+        if (!form.firstName) {
+            setErrors((prev) => { return { ...prev, firstName: 'Please add a firstName' } })
+        }
+
+        if (!form.email) {
+            setErrors((prev) => { return { ...prev, email: 'Please add a email' } })
+        }
+
+        if (!form.password) {
+            setErrors((prev) => { return { ...prev, password: 'Please add a password' } })
+        }
     }
 
     return (
@@ -71,7 +106,7 @@ export default function Register() {
                 iconPosition="right"
                 style={styles.input}
                 onChangeText={
-                    (value) => { onChange({ name: 'pasword', value }) }
+                    (value) => { onChange({ name: 'password', value }) }
                 }
                 error={errors.password}
             />
