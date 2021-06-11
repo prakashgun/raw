@@ -52,7 +52,7 @@ export default function Login() {
 
     return (
         <Container>
-            {error && <Text>n {error.error}</Text>}
+            {error && <Text>Error: {error.error}</Text>}
             <Input
                 label="Username"
                 iconPosition="right"
