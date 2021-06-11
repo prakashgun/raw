@@ -25,10 +25,10 @@ export default function Register() {
 
     useFocusEffect(
         useCallback(() => {
-            if (data) {
+            if (data || error) {
                 clearAuthState()(authDispatch)
             }
-        }), [data])
+        }), [data, error])
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value })
@@ -37,8 +37,8 @@ export default function Register() {
 
         if (value) {
             if (name === 'password') {
-                if (value.length < 3) {
-                    setErrors((prev) => { return { ...prev, [name]: 'Password must be atleast 3 characters' } })
+                if (value.length < 6) {
+                    setErrors((prev) => { return { ...prev, [name]: 'Password must be atleast 6 characters' } })
                 } else {
                     setErrors((prev) => { return { ...prev, [name]: null } })
                 }
@@ -50,6 +50,7 @@ export default function Register() {
 
         }
     }
+
     const onSubmit = () => {
         //validation
         console.log('form', form)

@@ -40,6 +40,7 @@ export default function Input({ label, icon, iconPosition, style, onChangeText, 
                 value={value}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
+                autoCapitalize="none"
             />
             </View>
            {error && <Text style={styles.error}>{error}</Text>} 
