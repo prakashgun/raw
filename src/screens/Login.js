@@ -29,7 +29,7 @@ export default function Login() {
 
             <CustomButton title="Submit" loading={false} disabled={true} />
             <TouchableOpacity style={styles.registerButton} onPress={() => {navigate('Register') }}>
-                <Text>Register</Text>
+                <Text style={styles.registerText}>Register Here</Text>
             </TouchableOpacity>
         </Container>
     )
@@ -38,7 +38,9 @@ export default function Login() {
 const styles = StyleSheet.create({
     input: {},
     registerButton:{
-        padding: 10,
-        fontSize: 40
+        padding: 10
+    },
+    registerText:{
+        fontSize: 20
     }
 })

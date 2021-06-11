@@ -1,22 +1,39 @@
 import { useNavigation } from '@react-navigation/core'
-import React, { useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Container from '../components/common/Container'
 import CustomButton from '../components/common/CustomButton'
 import Input from '../components/common/Input'
-import envs from '../config/env'
+import { BACKEND_URL } from '@env'
+import axiosInstance from '../helpers/axiosInstance'
+import registerAction, { clearAuthState } from '../context/actions/auth/registerAction'
+import GlobalContext from '../context/GlobalContext'
+import { useFocusEffect } from '@react-navigation/native'
 
 export default function Register() {
     const [form, setForm] = useState({})
     const [errors, setErrors] = useState({})
     const { navigate } = useNavigation()
-    const {BACKEND_URL} = envs
+    const { authDispatch, auth: { error, loading, data } } = useContext(GlobalContext)
 
-    console.log('backend url2: ', BACKEND_URL)
+    useEffect(() => {
+        if (data) {
+            navigate('Login')
+        }
+    }, [data])
+
+    useFocusEffect(
+        useCallback(() => {
+            if (data) {
+                clearAuthState()(authDispatch)
+            }
+        }), [data])
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value })
+
+
 
         if (value) {
             if (name === 'password') {
@@ -56,10 +73,15 @@ export default function Register() {
         if (!form.password) {
             setErrors((prev) => { return { ...prev, password: 'Please add a password' } })
         }
+
+        if (Object.values(form).length === 5) {
+            registerAction(form)(authDispatch)
+        }
     }
 
     return (
         <Container>
+            {error && <Text>n {error.error}</Text>}
             <Input
                 label="First Name"
                 iconPosition="right"
@@ -67,16 +89,7 @@ export default function Register() {
                 onChangeText={
                     (value) => { onChange({ name: 'firstName', value }) }
                 }
-                error={errors.firstName}
-            />
-            <Input
-                label="First Name"
-                iconPosition="right"
-                style={styles.input}
-                onChangeText={
-                    (value) => { onChange({ name: 'firstName', value }) }
-                }
-                error={errors.firstName}
+                error={errors.firstName || error?.first_name?.[0]}
             />
             <Input
                 label="Last Name"
@@ -85,7 +98,7 @@ export default function Register() {
                 onChangeText={
                     (value) => { onChange({ name: 'lastName', value }) }
                 }
-                error={errors.firstName}
+                error={errors.firstName || error?.last_name?.[0]}
             />
             <Input
                 label="Username"
@@ -94,7 +107,7 @@ export default function Register() {
                 onChangeText={
                     (value) => { onChange({ name: 'userName', value }) }
                 }
-                error={errors.userName}
+                error={errors.userName || error?.username?.[0]}
             />
             <Input
                 label="Email"
@@ -103,7 +116,7 @@ export default function Register() {
                 onChangeText={
                     (value) => { onChange({ name: 'email', value }) }
                 }
-                error={errors.email}
+                error={errors.email || error?.email?.[0]}
             />
             <Input
                 label="Password"
@@ -112,7 +125,7 @@ export default function Register() {
                 onChangeText={
                     (value) => { onChange({ name: 'password', value }) }
                 }
-                error={errors.password}
+                error={errors.password || error?.password?.[0]}
             />
 
             <CustomButton title="Submit" loading={false} disable={true} onPress={onSubmit} />
